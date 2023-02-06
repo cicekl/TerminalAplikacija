@@ -1,0 +1,2 @@
+# TerminalAplikacija
+Izrada terminal aplikacije
