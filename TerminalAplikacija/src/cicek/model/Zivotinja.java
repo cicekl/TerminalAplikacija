@@ -97,7 +97,11 @@ public class Zivotinja extends Entitet{
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		//što želimo vidjeti
+		return ime;
+	}
 	
 
 }
