@@ -1,5 +1,6 @@
 package cicek.obrada;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +13,28 @@ public class Zivotinje {
 	private List<Zivotinja> zivotinje; //konstruirana
 	private Start start;
 	
+	public Zivotinje(Start start) {
+		super();
+		this.start = start;
+		zivotinje = new ArrayList<>();
+		testPodaci(); //nakon konstrukcije
+	}
 	
 	public Zivotinje(Start start, List<Zivotinja> zivotinje) { //radi samo sa start klasom
 		super();
 		this.start = start;
 		this.zivotinje = zivotinje;
+		testPodaci();
 	}
+	
 
-	public Zivotinje(Start start) {
-		super();
-		this.start = start;
-		zivotinje = new ArrayList<>();
+	private void testPodaci() {
+		if(Pomocno.DEV) {
+			zivotinje.add(new Zivotinja(1, new BigDecimal(1200.00), new BigDecimal(42000.00), "Ptice","Kanarinac","Žutokljunac",null, null, null, null, null)); //dodavanje liste
+			zivotinje.add(new Zivotinja(2, new BigDecimal(20000.00),new BigDecimal(4000000.00),"Sisavci" ,"Siva vjeverica","Sivka",null,null,null,null,null));
+			zivotinje.add(new Zivotinja(3,new BigDecimal(2000.00),new BigDecimal(500.00),"Sisavci","Činčila","Frxy",null,null,null,null,null));
+		}
+		
 	}
 	
 	public void izbornik() {
@@ -57,15 +69,15 @@ public class Zivotinje {
 				unosNove();
 				break;
 			case 2:
-				pregled();
+				pregled(true);
 				break;
 			case 3:
-				if(zivotinje.size()==0) {
+			/*	if(zivotinje.size()==0) {
 					System.out.println("Nema životinja koje bi promijenili!");
 				izbornik(); 
-				}  else {
-				//	promjena();
-			}
+				}  else { */
+				promjena();
+			
 				break;
 			case 4: 
 				if(zivotinje.size()==0) {
@@ -84,14 +96,33 @@ public class Zivotinje {
 	
 }
 
-	private void pregled() {
+	private void promjena() {
+	pregled(false);
+	int rb= Pomocno.unosRaspon("Odaberi životinju koju želiš promijeniti: ", 1, zivotinje.size());
+	Zivotinja z = zivotinje.get(rb-1); 
+	z.setMinimalnaKvadratura(Pomocno.unosDecimalni("Unesi minimalnu kvadraturu za željenu životinju: "));
+	z.setMinimalnaKubikaza(Pomocno.unosDecimalni("Unesi minimalnu kubikazu za željenu životinju: "));
+	z.setZivotinjskaVrsta(Pomocno.unosStringa("Unesi životinjsku vrstu životinje: "));
+	z.setVrsta(Pomocno.unosStringa("Unesi vrstu životinje:"));
+	z.setIme(Pomocno.unosStringa("Unesi ime životinje:"));
+	z.setDatumRodenja(Pomocno.unosDatuma("Unesite datum rođenja životinje u formatu dd.mm.yyyy.:"));
+	z.setDatumDolaska(Pomocno.unosDatuma("Unesite datum dolaska životinje u formatu dd.mm.yyyy.:")); 	
+	izbornik();
+	}
+
+	private void pregled(boolean prikaziIzbornik) {
 		System.out.println("");
+		System.out.println("-----------------------");
 		System.out.println("Životinje u aplikaciji:");
+		System.out.println("");
+		int rb=1;
 		for(Zivotinja z: zivotinje) {
-			System.out.println(z);
+			System.out.println(rb++ + ". "+z);
 		}
+		System.out.println("-----------------------");
 		
-		izbornik();
+		if(prikaziIzbornik) {
+		izbornik(); }
 		
 	}
 
@@ -106,9 +137,10 @@ public class Zivotinje {
 		z.setMinimalnaKvadratura(Pomocno.unosDecimalni("Unesi minimalnu kvadraturu za željenu životinju: "));
 		z.setMinimalnaKubikaza(Pomocno.unosDecimalni("Unesi minimalnu kubikazu za željenu životinju: "));
 		z.setZivotinjskaVrsta(Pomocno.unosStringa("Unesi životinjsku vrstu životinje: "));
-		z.setVrsta(Pomocno.unosStringa("Unesi vrstu životinje"));
-		z.setIme(Pomocno.unosStringa("Unesi ime životinje"));
-		//datumi
+		z.setVrsta(Pomocno.unosStringa("Unesi vrstu životinje:"));
+		z.setIme(Pomocno.unosStringa("Unesi ime životinje:"));
+		z.setDatumRodenja(Pomocno.unosDatuma("Unesite datum rođenja životinje u formatu dd.mm.yyyy.:"));
+		z.setDatumDolaska(Pomocno.unosDatuma("Unesite datum dolaska životinje u formatu dd.mm.yyyy.:")); 
 		//djelatnik i prostorija
 		return z;
 	} }
