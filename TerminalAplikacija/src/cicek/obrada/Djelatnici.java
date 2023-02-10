@@ -1,11 +1,13 @@
 package cicek.obrada;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import cicek.Pomocno;
 import cicek.Start;
 import cicek.model.Djelatnik;
+import cicek.model.Zivotinja;
 
 public class Djelatnici {
 	
@@ -17,6 +19,7 @@ public class Djelatnici {
 		super();
 		this.start = start;
 		djelatnici = new ArrayList<>();
+		testPodaci();
 	}
 
 
@@ -24,10 +27,21 @@ public class Djelatnici {
 		super();
 		this.djelatnici = djelatnici;
 		this.start = start;
+		testPodaci();
 		
 		
 	}
 	
+	private void testPodaci() {
+		if(Pomocno.DEV) {
+			djelatnici.add(new Djelatnik(1, "Tibor","Novak",null)); //dodavanje liste
+			djelatnici.add(new Djelatnik(2, "Patricija", "Kovačić",null));
+			djelatnici.add(new Djelatnik(3,"Patrik", "Ivanović",null));
+		}
+		
+	}
+
+
 	public void izbornik() {
 		System.out.println("");
 		System.out.println("IZBORNIK DJELATNIKA");
@@ -51,7 +65,7 @@ public class Djelatnici {
 		//	unosNove();
 			break;
 		case 2:
-		//	pregled();
+			pregled();
 			break;
 		case 3:
 			if(djelatnici.size()==0) {
@@ -77,6 +91,21 @@ public class Djelatnici {
 
 
 }
+
+
+	private void pregled() {
+		System.out.println("");
+		System.out.println("-----------------------");
+		System.out.println("Životinje u aplikaciji:");
+		System.out.println("");
+		int rb=1;
+		for(Djelatnik d: djelatnici) {
+			System.out.println(rb++ + ". "+d);
+		}
+		System.out.println("-----------------------");
+		izbornik();
+		
+	}
 	
 	
 }
