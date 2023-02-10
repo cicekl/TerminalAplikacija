@@ -2,19 +2,23 @@ package cicek;
 
 import java.util.Scanner;
 
+
 import cicek.obrada.Djelatnici;
+import cicek.obrada.Prostorije;
 import cicek.obrada.Zivotinje;
 
 public class Start {
 	
 	private Zivotinje zivotinje; //moraju biti povezani
 	private Djelatnici djelatnici;
+	private Prostorije prostorije;
 	
 	public Start() {
 		
 		Pomocno.ulaz = new Scanner(System.in);
 		zivotinje = new Zivotinje(this);
 		djelatnici = new Djelatnici(this);
+		prostorije = new Prostorije(this);
 		prvaPoruka();
 		glavniIzbornik();
 		
@@ -60,6 +64,12 @@ public class Start {
 	}
 
 	public static void main(String[] args) {
+		if(args.length==1) {
+			Pomocno.DEV=true;
+		}else {
+			Pomocno.DEV=false;
+		}
+		
 		
 		new Start();
 		
