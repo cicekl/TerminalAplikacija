@@ -34,6 +34,9 @@ public class Djelatnik extends Entitet{
 		Iban = iban;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return ime + " " + prezime;
+	}
 
 }
