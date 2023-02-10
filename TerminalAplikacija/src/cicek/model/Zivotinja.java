@@ -35,6 +35,7 @@ public class Zivotinja extends Entitet{
 		this.djelatnik = djelatnik;
 		this.prostorija = prostorija;
 	}
+	
 	public BigDecimal getMinimalnaKvadratura() {
 		return minimalnaKvadratura;
 	}
