@@ -7,6 +7,7 @@ import java.util.List;
 import cicek.Pomocno;
 import cicek.Start;
 import cicek.model.Djelatnik;
+import cicek.model.Prostorija;
 import cicek.model.Zivotinja;
 
 public class Djelatnici {
@@ -130,7 +131,7 @@ public class Djelatnici {
 	}
 
 
-	private void pregled(boolean prikaziIzbornik) {
+	public void pregled(boolean prikaziIzbornik) {
 		System.out.println("");
 		System.out.println("-----------------------");
 		System.out.println("Djelatnici u aplikaciji:");
@@ -144,6 +145,9 @@ public class Djelatnici {
 		izbornik();
 		}
 	}
-	
+
+	public List<Djelatnik> getDjelatnici() {
+		return djelatnici;
+	}
 	
 }

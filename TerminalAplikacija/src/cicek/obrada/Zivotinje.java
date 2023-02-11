@@ -6,6 +6,7 @@ import java.util.List;
 
 import cicek.Pomocno;
 import cicek.Start;
+import cicek.model.Djelatnik;
 import cicek.model.Zivotinja;
 
 public class Zivotinje {
@@ -72,19 +73,18 @@ public class Zivotinje {
 				pregled(true);
 				break;
 			case 3:
-			/*	if(zivotinje.size()==0) {
+				if(zivotinje.size()==0) {
 					System.out.println("Nema životinja koje bi promijenili!");
 				izbornik(); 
-				}  else { */
-				promjena();
-			
-				break;
+				}  else { 
+				promjena(); }
+				break; 
 			case 4: 
 				if(zivotinje.size()==0) {
 					System.out.println("Nema životinja koje bi obrisali!");
 				izbornik(); 
 				}  else {
-			//		brisanje();
+				brisanje();
 			}
 				break;
 			case 5: 
@@ -95,6 +95,14 @@ public class Zivotinje {
 
 	
 }
+
+	private void brisanje() {
+		pregled(false);
+		int rb = Pomocno.unosRaspon("Odaberite djelatnika kojeg želite obrisati: ", 1, zivotinje.size());
+		zivotinje.remove(rb-1);
+		izbornik();
+		
+	}
 
 	private void promjena() {
 	pregled(false);
@@ -107,6 +115,8 @@ public class Zivotinje {
 	z.setIme(Pomocno.unosStringa("Unesi ime životinje:"));
 	z.setDatumRodenja(Pomocno.unosDatuma("Unesite datum rođenja životinje u formatu dd.mm.yyyy.:"));
 	z.setDatumDolaska(Pomocno.unosDatuma("Unesite datum dolaska životinje u formatu dd.mm.yyyy.:")); 	
+	//djelatnik pa prostorija
+	
 	izbornik();
 	}
 
@@ -120,9 +130,9 @@ public class Zivotinje {
 			System.out.println(rb++ + ". "+z);
 		}
 		System.out.println("-----------------------");
-		
 		if(prikaziIzbornik) {
-		izbornik(); }
+		izbornik();
+		}
 		
 	}
 
@@ -142,5 +152,11 @@ public class Zivotinje {
 		z.setDatumRodenja(Pomocno.unosDatuma("Unesite datum rođenja životinje u formatu dd.mm.yyyy.:"));
 		z.setDatumDolaska(Pomocno.unosDatuma("Unesite datum dolaska životinje u formatu dd.mm.yyyy.:")); 
 		//djelatnik i prostorija
+		start.getDjelatnici().pregled(false);
+		int rbD = Pomocno.unosRaspon("Odaberite djelatnika koji radi s ovom životinjom: ", 1, start.getDjelatnici().getDjelatnici().size());
+		z.setDjelatnik(start.getDjelatnici().getDjelatnici().get(rbD-1));
+		start.getProstorije().pregled(false);
+		int rbP = Pomocno.unosRaspon("Odaberite prostoriju u kojoj se nalazi ova životinja: ", 1, start.getProstorije().getProstorije().size());
+		z.setProstorija(start.getProstorije().getProstorije().get(rbP-1));
 		return z;
 	} }

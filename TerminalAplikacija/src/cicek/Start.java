@@ -54,13 +54,23 @@ public class Start {
 			djelatnici.izbornik();
 			break;
 		case 3:
-		//	prostorije.izbornik();
+			prostorije.izbornik();
 			break;
 		case 4:
 			System.out.println("Doviđenja!");
 		
 		}
 		
+	}
+	
+
+	public Djelatnici getDjelatnici() {
+		return djelatnici;
+	}
+	
+
+	public Prostorije getProstorije() {
+		return prostorije;
 	}
 
 	public static void main(String[] args) {
