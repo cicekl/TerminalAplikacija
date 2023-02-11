@@ -62,25 +62,25 @@ public class Djelatnici {
 		System.out.println("-----------------------");
 		switch(Pomocno.unosRaspon("Odaberi opciju: ", 1, 5)) {
 		case 1:
-		//	unosNove();
+			unosNovog();
 			break;
 		case 2:
-			pregled();
+			pregled(true);
 			break;
 		case 3:
 			if(djelatnici.size()==0) {
-				System.out.println("Nema životinja koje bi promijenili!");
+				System.out.println("Nema djelatnika koje bi promijenili!");
 			izbornik(); 
 			}  else {
-			//	promjena();
+			promjena();
 		}
 			break;
 		case 4: 
 			if(djelatnici.size()==0) {
-				System.out.println("Nema životinja koje bi obrisali!");
+				System.out.println("Nema djelatnika koje bi obrisali!");
 			izbornik(); 
 			}  else {
-		//		brisanje();
+			brisanje();
 		}
 			break;
 		case 5: 
@@ -93,18 +93,56 @@ public class Djelatnici {
 }
 
 
-	private void pregled() {
+	private void brisanje() {
+		pregled(false);
+		int rb = Pomocno.unosRaspon("Odaberite djelatnika kojeg želite obrisati: ", 1, djelatnici.size());
+		djelatnici.remove(rb-1);
+		izbornik();
+	}
+
+
+	private void promjena() {
+		pregled(false);
+		int rb = Pomocno.unosRaspon("Odaberite djelatnika kojeg želite promijeniti: ", 1, djelatnici.size());
+		Djelatnik d = djelatnici.get(rb-1);
+		d.setSifra(Pomocno.unosRaspon("Unesi šifru djelatnika: ", 1, Integer.MAX_VALUE));
+		d.setIme(Pomocno.unosStringa("Unesi ime djelatnika: "));
+		d.setPrezime(Pomocno.unosStringa("Unesi prezime djelatnika: "));
+		d.setIban("Unesi IBAN djelatnika: ");
+		izbornik();
+	}
+
+
+	private void unosNovog() {
+		djelatnici.add(unesiNovogDjelatnika());
+		izbornik();
+		
+	}
+
+
+	private Djelatnik unesiNovogDjelatnika() {
+		Djelatnik d = new Djelatnik();
+		d.setSifra(Pomocno.unosRaspon("Unesi šifru djelatnika: ", 1, Integer.MAX_VALUE));
+		d.setIme(Pomocno.unosStringa("Unesi ime djelatnika: "));
+		d.setPrezime(Pomocno.unosStringa("Unesi prezime djelatnika: "));
+		d.setIban("Unesi IBAN djelatnika: ");
+		return d;
+	}
+
+
+	private void pregled(boolean prikaziIzbornik) {
 		System.out.println("");
 		System.out.println("-----------------------");
-		System.out.println("Životinje u aplikaciji:");
+		System.out.println("Djelatnici u aplikaciji:");
 		System.out.println("");
 		int rb=1;
 		for(Djelatnik d: djelatnici) {
 			System.out.println(rb++ + ". "+d);
 		}
 		System.out.println("-----------------------");
+		if(prikaziIzbornik) {
 		izbornik();
-		
+		}
 	}
 	
 	
